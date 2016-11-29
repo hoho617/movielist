@@ -1,0 +1,41 @@
+<h1 class="fontSize">{{title}}</h1>
+<div class="list-group">
+    <a ng-repeat="item in subjects" href="#/detail/{{item.id}}" class="list-group-item">
+        <span class="badge">{{item.rating.average}}</span>
+        <div class="media">
+            <div class="media-left" href="#">
+                <img ng-src="{{item.images.small}}" alt="{{item.title}}" height="128">
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">{{item.title}}</h3>
+                <p>类型：<span>{{item.genres.join('、')}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年份：<span>{{item.year}}</span></p>
+                <p>导演：<span ng-repeat="director in item.directors">{{director.name}}{{$last?'':'、'}}</span></p>
+                <p>主演：<span ng-repeat="cast in item.casts">{{cast.name}}{{$last?'':'、'}}</span></p>
+            </div>
+        </div>
+    </a>
+</div>
+<div ng-show="!loading">
+    <p class="text-right">总共：{{totalCount}}&nbsp;&nbsp;条记录，第&nbsp;{{currentPage}}/{{totalPage}}&nbsp;页&nbsp;&nbsp;&nbsp;</p>
+    <div class="footer">
+        <p>&copy; 版权所有--&nbsp;hoho &nbsp;2016</p>
+    </div>
+    <ul class="arr">
+        <li ng-class="{prev:true,disabled:currentPage<=1}">
+            <a ng-click="goPage(currentPage - 1)"><img src="images/dirl.png" alt="" /></a>
+        </li>
+        <li ng-class="{next:true,disabled:currentPage>=totalPage}">
+            <a ng-click="goPage(currentPage + 1)"><img src="images/dirr.png" alt="" /></a>
+        </li>
+    </ul>
+</div>
+
+<div id="mask" ng-show="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
